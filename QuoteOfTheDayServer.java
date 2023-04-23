@@ -6,7 +6,7 @@ public class QuoteOfTheDayServer {
 
     private static final int PORT = 17;
     private static final int MAX_PACKET_SIZE = 512;
-    private static ExecutorService exec = Executors.newCachedThreadPool();;
+    private static ExecutorService exec = Executors.newCachedThreadPool();
 
     public static void handleTCPRequest(ServerSocket tcpServer) {
          try {
@@ -75,11 +75,11 @@ public class QuoteOfTheDayServer {
      try {
         ServerSocket tcpServer = new ServerSocket(PORT);
         DatagramSocket udpServer = new DatagramSocket(PORT);
+         
+        System.out.println("Server Starting...");
    
         Runnable tcpTask = () -> handleTCPRequest(tcpServer);
         Runnable udpTask = () -> handleUDPRequest(udpServer);
-
-        System.out.println("Server Starting...");
    
         exec.submit(tcpTask);
         exec.submit(udpTask);
